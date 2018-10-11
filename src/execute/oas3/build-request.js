@@ -75,6 +75,11 @@ export default function (options, req) {
                 if (Array.isArray(val)) {
                   newVal = val.toString()
                 }
+                else if (val.pipe && val.on) {
+                  // stream (e.g. fs.createReadStream('/some-file.txt')
+                  newVal = val
+                  isFile = true
+                }
                 else {
                   newVal = JSON.stringify(val)
                 }
